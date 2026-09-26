@@ -58,3 +58,15 @@ A GitHub Pages workflow is included for automatic frontend previews. In reposito
 - Build: `npm run build`
 - Start: `node --env-file-if-exists=.env server.mjs`
 - Runtime: Node 20+
+
+### Vercel + Supabase
+
+The repository includes `vercel.json` and Vercel Functions:
+
+- `GET /api/health` checks the runtime and Supabase configuration.
+- `GET /api/reports` loads recent reports.
+- `POST /api/reports` validates and saves a new report.
+
+Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and the server-only
+`SUPABASE_SERVICE_ROLE_KEY` in Vercel Project Settings. Never prefix the
+service-role key with `VITE_`.
