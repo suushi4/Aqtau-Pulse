@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a66c2" />
+  <meta name="description" content="Aqtau Pulse — живая карта города для жителей, туристов, бизнеса и городских служб." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="stylesheet" href="/styles.css" />
+  <title>Aqtau Pulse — город в реальном времени</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-view="map" aria-label="На главную">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span><b>Aqtau</b><strong>Pulse</strong></span>
+      </button>
+      <label class="global-search">
+        <span aria-hidden="true">🔎</span>
+        <input id="searchInput" type="search" placeholder="Найти событие, место или проблему" aria-label="Поиск" />
+        <kbd>⌘ K</kbd>
+      </label>
+      <div class="top-actions">
+        <button class="icon-button" id="themeToggle" aria-label="Сменить тему">☼</button>
+        <button class="icon-button notification-button" id="notificationBtn" aria-label="Уведомления">●<span>3</span></button>
+        <button class="profile-chip" data-view="profile" aria-label="Открыть профиль"><span class="avatar">ZS</span><span class="profile-copy"><b>Зейнеп</b><small>Ур. 8 · 1 240 XP</small></span></button>
+      </div>
+    </header>
+
+    <aside class="sidebar" aria-label="Основная навигация">
+      <nav>
+        <button class="nav-item active" data-view="map"><span>◎</span>Карта</button>
+        <button class="nav-item" data-view="feed"><span>≡</span>Лента</button>
+        <button class="nav-item" data-view="services"><span>✓</span>Обращения <em>4</em></button>
+        <button class="nav-item" data-view="events"><span>○</span>События</button>
+        <button class="nav-item" data-view="tourism"><span>◆</span>Туристу</button>
+        <button class="nav-item" data-view="community"><span>♥</span>Сообщества</button>
+      </nav>
+      <div class="sidebar-section">
+        <p>МОЙ ГОРОД</p>
+        <button class="nav-item" data-view="saved"><span>♡</span>Сохранённое</button>
+        <button class="nav-item" data-view="volunteer"><span>✦</span>Волонтёрство</button>
+        <button class="nav-item" data-view="dashboard"><span>▦</span>Дашборд служб</button>
+      </div>
+      <div class="impact-card">
+        <span class="impact-icon">↗</span>
+        <b>Ваш вклад заметен</b>
+        <p>7 проблем подтверждено, 3 уже решены</p>
+        <div class="progress"><span style="width:72%"></span></div>
+        <small>До уровня «Городской эксперт» — 280 XP</small>
+      </div>
+      <button class="emergency" id="emergencyBtn"><span>112</span><b>Экстренная помощь</b><small>При угрозе жизни звоните</small></button>
+    </aside>
+
+    <main id="mainContent" tabindex="-1">
+      <section class="view active" id="view-map">
+        <div class="map-layout">
+          <div class="map-stage" id="mapStage">
+            <div class="map-canvas" aria-label="Интерактивная карта Актау">
+              <div class="sea"><span>КАСПИЙСКОЕ МОРЕ</span></div>
+              <div class="coast"></div>
+              <div class="roads roads-a"></div><div class="roads roads-b"></div><div class="roads roads-c"></div><div class="roads roads-d"></div><div class="roads roads-e"></div>
+              <span class="map-label ml-1">14 мкр.</span><span class="map-label ml-2">Набережная</span><span class="map-label ml-3">Ботанический сад</span><span class="map-label ml-4">Актау Сити</span>
+              <div id="markerLayer"></div>
+            </div>
+            <div class="map-heading">
+              <div><p class="eyebrow">АКТАУ · ПРЯМО СЕЙЧАС</p><h1>Что происходит рядом?</h1><p><span class="live-dot"></span> 128 активных точек · обновлено сейчас</p></div>
+              <button class="location-button" id="locationBtn">◎ <span>Моё местоположение</span></button>
+            </div>
+            <div class="layer-bar" id="layerBar">
+              <button class="filter-chip active" data-filter="all"><span>●</span> Всё <b>128</b></button>
+              <button class="filter-chip" data-filter="problem"><span class="orange">●</span> Проблемы <b>34</b></button>
+              <button class="filter-chip" data-filter="event"><span class="blue">●</span> События <b>18</b></button>
+              <button class="filter-chip" data-filter="danger"><span class="red">●</span> Безопасность <b>6</b></button>
+              <button class="filter-chip" data-filter="place"><span class="purple">●</span> Места <b>52</b></button>
+              <button class="filter-chip" data-filter="offer"><span class="yellow">●</span> Акции <b>18</b></button>
+            </div>
+            <div class="map-controls"><button id="zoomIn" aria-label="Приблизить">+</button><button id="zoomOut" aria-label="Отдалить">−</button><button id="recenter" aria-label="Центрировать">◎</button></div>
+            <div class="weather-card"><span class="weather-icon">~</span><div><b>+24°</b><small>Ясно · ветер 8 м/с</small></div><span class="wave-status">Море спокойно</span></div>
+          </div>
+
+          <aside class="live-panel">
+            <div class="panel-head"><div><p class="eyebrow">ЖИВОЙ ГОРОД</p><h2>Сейчас в Актау</h2></div><button id="panelOptions" aria-label="Настройки ленты">•••</button></div>
+            <div class="quick-actions">
+              <button data-open-create="problem"><span class="qa-orange">＋</span><b>Сообщить</b><small>о проблеме</small></button>
+              <button data-open-create="moment"><span class="qa-blue">●</span><b>Момент</b><small>поделиться</small></button>
+              <button data-open-create="event"><span class="qa-purple">○</span><b>Событие</b><small>добавить</small></button>
+            </div>
+            <div class="feed-tabs"><button class="active" data-feed="near">Рядом</button><button data-feed="urgent">Важное</button><button data-feed="following">Подписки</button></div>
+            <div class="live-list" id="liveList"></div>
+            <button class="load-more" id="loadMore">Показать ещё <span>↓</span></button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view content-view" id="view-feed"><div class="page-title"><div><p class="eyebrow">ГОРОД В РЕАЛЬНОМ ВРЕМЕНИ</p><h1>Лента Актау</h1><p>Проверенные новости, моменты и обновления рядом с вами.</p></div><button class="primary-button" data-open-create="moment">＋ Создать публикацию</button></div><div class="content-grid"><div class="card-column" id="feedPage"></div><aside class="side-column" id="feedAside"></aside></div></section>
+      <section class="view content-view" id="view-services"><div class="page-title"><div><p class="eyebrow">ОТ ФОТО ДО РЕЗУЛЬТАТА</p><h1>Городские обращения</h1><p>Следите за каждым этапом и подтверждайте результат.</p></div><button class="primary-button" data-open-create="problem">＋ Новое обращение</button></div><div class="metrics" id="serviceMetrics"></div><div class="service-board" id="serviceBoard"></div></section>
+      <section class="view content-view" id="view-events"><div class="page-title"><div><p class="eyebrow">ПЛАНЫ НА НЕДЕЛЮ</p><h1>События в Актау</h1><p>Фестивали, спорт, лекции, экскурсии и добрые дела.</p></div><button class="primary-button" data-open-create="event">＋ Добавить событие</button></div><div class="event-hero" id="eventHero"></div><div class="event-grid" id="eventGrid"></div></section>
+      <section class="view content-view" id="view-tourism"><div class="tourism-hero"><div><p class="eyebrow">АКТАУ ДЛЯ ГОСТЕЙ</p><h1>Море. Скалы. Город.</h1><p>Готовый день в Актау с безопасным маршрутом, местами отдыха и событиями.</p><div><button class="primary-button" id="buildRoute">Построить маршрут</button><button class="secondary-button" data-view="saved">Сохранённые места</button></div></div><div class="sun-disc"></div></div><div class="day-planner" id="dayPlanner"></div><div class="place-grid" id="placeGrid"></div></section>
+      <section class="view content-view" id="view-community"><div class="page-title"><div><p class="eyebrow">ЛЮДИ РЯДОМ</p><h1>Сообщества и помощь</h1><p>Районы, волонтёры, находки и соседские инициативы.</p></div><button class="primary-button" id="newCommunity">＋ Создать сообщество</button></div><div class="community-grid" id="communityGrid"></div></section>
+      <section class="view content-view" id="view-saved"><div class="page-title"><div><p class="eyebrow">ВАШИ ПЛАНЫ</p><h1>Сохранённое</h1><p>Места, события, маршруты и важные обращения.</p></div></div><div class="saved-grid" id="savedGrid"></div></section>
+      <section class="view content-view" id="view-volunteer"><div class="page-title"><div><p class="eyebrow">ДЕЛАЕМ ВМЕСТЕ</p><h1>Волонтёрский центр</h1><p>Присоединяйтесь к городским заданиям и экологическим акциям.</p></div></div><div class="challenge-grid" id="challengeGrid"></div></section>
+      <section class="view content-view" id="view-dashboard"><div class="page-title"><div><p class="eyebrow">ПАНЕЛЬ ГОРОДСКИХ СЛУЖБ</p><h1>Оперативная обстановка</h1><p>Приоритеты, исполнители и прозрачная статистика.</p></div><button class="secondary-button" id="exportBtn">Экспорт отчёта</button></div><div class="metrics dashboard-metrics" id="dashboardMetrics"></div><div class="dashboard-grid" id="dashboardGrid"></div></section>
+      <section class="view content-view" id="view-profile"><div class="profile-hero" id="profileHero"></div><div class="profile-grid" id="profileGrid"></div></section>
+    </main>
+
+    <nav class="mobile-nav" aria-label="Мобильная навигация"><button class="active" data-view="map"><span>◎</span>Карта</button><button data-view="feed"><span>≡</span>Лента</button><button class="mobile-create" data-open-create="problem">＋</button><button data-view="events"><span>○</span>События</button><button data-view="profile"><span>○</span>Профиль</button></nav>
+  </div>
+
+  <div class="drawer" id="notificationDrawer" aria-hidden="true"><div class="drawer-head"><div><p class="eyebrow">ОБНОВЛЕНИЯ</p><h2>Уведомления</h2></div><button data-close-drawer>×</button></div><div id="notificationList"></div><button class="load-more" id="markRead">Отметить всё прочитанным</button></div>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head"><div><p class="eyebrow">НОВАЯ ТОЧКА НА КАРТЕ</p><h2 id="modalTitle">Сообщить о проблеме</h2></div><button id="closeModal" aria-label="Закрыть">×</button></div>
+      <form id="createForm">
+        <div class="type-selector"><button type="button" class="active" data-type="problem">Проблема</button><button type="button" data-type="moment">Момент</button><button type="button" data-type="event">Событие</button><button type="button" data-type="place">Место</button></div>
+        <label class="photo-drop" id="photoDrop"><input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" hidden /><span id="photoPreview">＋</span><b>Добавить фото или короткое видео</b><small>JPG, PNG, WebP до 10 МБ · лица можно размыть</small></label>
+        <div class="form-grid"><label><span>Заголовок</span><input name="title" required maxlength="80" placeholder="Коротко: что произошло?" /></label><label><span>Категория</span><select name="category"><option>Благоустройство</option><option>Дороги</option><option>Мусор</option><option>Освещение</option><option>Безопасность</option><option>Экология</option><option>Транспорт</option><option>Мероприятие</option><option>Туризм</option></select></label></div>
+        <label><span>Описание</span><textarea name="description" rows="3" required placeholder="Добавьте детали, которые помогут жителям или городской службе"></textarea></label>
+        <div class="form-grid"><label><span>Местоположение</span><div class="input-action"><input name="location" value="14 мкр., рядом с набережной" required /><button type="button" id="detectLocation">◎</button></div></label><label><span>Срочность</span><select name="priority"><option>Обычная</option><option>Важная</option><option>Срочная</option></select></label></div>
+        <label class="privacy-row"><input type="checkbox" name="anonymous" /><span><b>Опубликовать анонимно</b><small>Имя будет скрыто, но модератор увидит автора</small></span></label>
+        <div class="notice">ℹ Публикация пользователя появится с отметкой «ещё не проверено». При угрозе жизни звоните 112.</div>
+        <div class="modal-actions"><button type="button" class="secondary-button" id="saveDraft">Сохранить черновик</button><button type="submit" class="primary-button">Опубликовать на карте</button></div>
+      </form>
+    </section>
+  </div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
