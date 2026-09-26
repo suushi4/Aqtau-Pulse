@@ -1,28 +1,31 @@
-# Aqtau Pulse
+# Aqtau Pulse — City Intelligence Network
 
-A polished full-stack civic platform for Aktau: a real OpenStreetMap-powered city pulse, issue reporting workflow, local events, tourism, communities, and a service operations center.
+A full-stack, trilingual civic network for Aktau. The product connects residents, tourists, local organizations, businesses, and city services through a real map and a transparent issue-resolution workflow.
 
-## Frontend
+## Experience
+
+- **Live city map:** real OpenStreetMap tiles, animated signal markers, category filters, popups, safe routes, weather, location, and a live activity stream.
+- **City pulse:** community posts, reactions, discussions, confirmations, saved content, trends, and personalization.
+- **City missions:** transparent issue Kanban with AI priority scores and interactive status progression.
+- **Agenda:** cinematic event discovery and interactive attendance.
+- **Explore Aktau:** local route builder, destinations, saved places, and an animated Caspian visual system.
+- **Communities:** interactive neighborhood and volunteer groups.
+- **City OS:** service performance, priorities, animated analytics, and export actions.
+- **Profiles and impact:** reputation, achievements, levels, and measurable civic contribution.
+
+## Design and interaction
 
 - React 19 + Vite
-- Motion for fluid route, modal, list, card, counter, and notification transitions
-- React Leaflet + OpenStreetMap centered on real Aktau coordinates
+- Motion animations and spring transitions
+- React Leaflet + OpenStreetMap
 - Lucide icon system
-- Russian, Kazakh, and English language switcher
-- Dark and light themes
-- Responsive desktop and mobile navigation
-- Accessible focus states and reduced-motion support
+- Complete Russian, Kazakh, and English interface
+- Light and dark modes
+- Responsive desktop/mobile layouts
+- Command palette (`Cmd/Ctrl + K`)
+- Animated map pins, ambient gradients, event visuals, data charts, modals, drawers, toasts, hover reactions, and reduced-motion support
 
-## Product areas
-
-- Live map with category filters, animated markers, popups, routes, weather, and location controls
-- City pulse feed with reactions, confirmations, comments, and saved posts
-- Two-step report composer with media, categories, location, and safety context
-- Transparent service Kanban and AI-priority operations dashboard
-- Event discovery, tourism day planner, neighborhood communities, volunteering, profiles, and reputation
-- Persistent Node REST API with optional Supabase Auth/Postgres/Storage
-
-## Run
+## Run locally
 
 ```bash
 npm install
@@ -30,9 +33,7 @@ npm start
 # http://localhost:3000
 ```
 
-`npm start` builds the React application and starts the Node API server.
-
-For frontend hot reload, run the API and Vite in two terminals:
+For hot reload:
 
 ```bash
 npm run server
@@ -46,15 +47,14 @@ npm run dev
 2. Run `supabase/schema.sql` in the SQL editor.
 3. Copy `.env.example` to `.env`.
 4. Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and the server-only `SUPABASE_SERVICE_ROLE_KEY`.
-5. Run `npm start` and open `/api/health`; it should report `mode: "supabase"`.
+5. Run `npm start`; `/api/health` should report `mode: "supabase"`.
 
-Never commit `.env` or expose the service-role key in browser code. Without variables, the app uses a persistent demo JSON database.
+Never commit `.env` or expose the service-role key in browser code. Without variables, the API uses a persistent demo database.
 
 ## Deployment
 
-Use Node 20+ on Render, Railway, Fly.io, or a VPS.
+A GitHub Pages workflow is included for automatic frontend previews. In repository settings, set **Pages → Source → GitHub Actions** once. For the full API and Supabase-backed application, deploy to Render, Railway, Fly.io, or a VPS:
 
-- Build command: `npm run build`
-- Start command: `node --env-file-if-exists=.env server.mjs`
-- Add Supabase values through the host's environment settings.
-- Put production deployments behind HTTPS.
+- Build: `npm run build`
+- Start: `node --env-file-if-exists=.env server.mjs`
+- Runtime: Node 20+
