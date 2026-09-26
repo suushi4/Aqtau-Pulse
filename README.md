@@ -1,40 +1,60 @@
 # Aqtau Pulse
 
-A responsive city social network and real-time map for Aktau residents, tourists, businesses, volunteers, and city services.
+A polished full-stack civic platform for Aktau: a real OpenStreetMap-powered city pulse, issue reporting workflow, local events, tourism, communities, and a service operations center.
 
-## Included
+## Frontend
 
-- Interactive city map with problems, events, safety alerts, places, offers, filtering, zoom, marker cards, and routes
-- Real-time style feed, confirmations, comments, likes, saved items, notifications, search, and dark mode
-- Full report creation flow with geolocation, media preview, validation, priorities, privacy, and drafts
-- Service Kanban, priority metrics, before/after workflow, dashboard, and downloadable report
-- Events, tourism day planner, communities, volunteering, reputation, achievements, emergency safety copy
-- Responsive desktop/mobile PWA shell with offline asset cache
-- Node REST API with persistent demo database; optional Supabase Auth/Postgres/Storage configuration
-- Supabase schema with RLS, roles, report confirmation aggregation, notifications, events, and media bucket
+- React 19 + Vite
+- Motion for fluid route, modal, list, card, counter, and notification transitions
+- React Leaflet + OpenStreetMap centered on real Aktau coordinates
+- Lucide icon system
+- Russian, Kazakh, and English language switcher
+- Dark and light themes
+- Responsive desktop and mobile navigation
+- Accessible focus states and reduced-motion support
+
+## Product areas
+
+- Live map with category filters, animated markers, popups, routes, weather, and location controls
+- City pulse feed with reactions, confirmations, comments, and saved posts
+- Two-step report composer with media, categories, location, and safety context
+- Transparent service Kanban and AI-priority operations dashboard
+- Event discovery, tourism day planner, neighborhood communities, volunteering, profiles, and reputation
+- Persistent Node REST API with optional Supabase Auth/Postgres/Storage
 
 ## Run
 
 ```bash
+npm install
 npm start
-# open http://localhost:3000
+# http://localhost:3000
 ```
 
-No installation is required; the server uses Node built-ins only.
+`npm start` builds the React application and starts the Node API server.
+
+For frontend hot reload, run the API and Vite in two terminals:
+
+```bash
+npm run server
+npm run dev
+# http://localhost:5173
+```
 
 ## Supabase
 
 1. Create a Supabase project.
 2. Run `supabase/schema.sql` in the SQL editor.
-3. Copy `.env.example` to `.env` and set the three variables in your deployment environment.
-4. Start the server. `/api/health` will report `mode: "supabase"`.
+3. Copy `.env.example` to `.env`.
+4. Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and the server-only `SUPABASE_SERVICE_ROLE_KEY`.
+5. Run `npm start` and open `/api/health`; it should report `mode: "supabase"`.
 
-Without Supabase environment variables, the app works in persistent demo mode using `data/db.json` (created automatically). Do not commit `.env` or service-role credentials.
+Never commit `.env` or expose the service-role key in browser code. Without variables, the app uses a persistent demo JSON database.
 
-## Production checklist
+## Deployment
 
-- Put the app behind HTTPS (Caddy/Nginx) and configure allowed origins.
-- Use Supabase Auth SMTP, CAPTCHA, MFA for service/admin roles, and rate limits.
-- Replace the illustrative map background with Leaflet/OpenStreetMap or MapLibre tiles and store PostGIS coordinates.
-- Add server-side image processing, EXIF stripping, content moderation, audit logs, Sentry, and backups.
-- Verify emergency and official city-service integrations before representing user reports as confirmed facts.
+Use Node 20+ on Render, Railway, Fly.io, or a VPS.
+
+- Build command: `npm run build`
+- Start command: `node --env-file-if-exists=.env server.mjs`
+- Add Supabase values through the host's environment settings.
+- Put production deployments behind HTTPS.
