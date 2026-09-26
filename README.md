@@ -70,3 +70,12 @@ The repository includes `vercel.json` and Vercel Functions:
 Set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and the server-only
 `SUPABASE_SERVICE_ROLE_KEY` in Vercel Project Settings. Never prefix the
 service-role key with `VITE_`.
+
+For browser authentication also set:
+
+- `VITE_SUPABASE_URL` — the same public project URL.
+- `VITE_SUPABASE_ANON_KEY` — the public anon key.
+
+The application supports persistent sessions, email/password signup and login,
+phone OTP, authenticated report creation, and authenticated media upload.
+Phone signup only works after an SMS provider is configured in Supabase Auth.

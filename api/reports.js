@@ -1,10 +1,9 @@
-import { randomUUID } from "node:crypto";
-
 const clean = (value, max) => String(value || "").trim().slice(0, max);
 
 export default async function handler(req, res) {
   try {
     const url = process.env.SUPABASE_URL;
+    const anonKey = process.env.SUPABASE_ANON_KEY;
     const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
     const headers = {
       apikey: key || "",
@@ -26,8 +25,27 @@ export default async function handler(req, res) {
       return res.status(405).json({ error: "Method not allowed" });
     }
 
+    const accessToken = String(req.headers.authorization || "").replace(
+      /^Bearer\s+/i,
+      "",
+    );
+    if (!url || !anonKey || !accessToken) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+    const userResponse = await fetch(`${url}/auth/v1/user`, {
+      headers: {
+        apikey: anonKey,
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    if (!userResponse.ok) {
+      return res.status(401).json({ error: "Invalid or expired session" });
+    }
+    const user = await userResponse.json();
+
     const body = req.body || {};
     const report = {
+      author_id: user.id,
       title: clean(body.title, 80),
       description: clean(body.description, 1000),
       location: clean(body.location, 160),
@@ -36,19 +54,14 @@ export default async function handler(req, res) {
       type: clean(body.type || "problem", 30),
       status: "new",
       confirmations: 0,
+      image_path: body.image_path ? clean(body.image_path, 500) : null,
     };
 
     if (!report.title || !report.description || !report.location) {
       return res.status(422).json({ error: "Required fields are missing" });
     }
 
-    if (!url || !key) {
-      return res.status(201).json({
-        ...report,
-        id: randomUUID(),
-        demo: true,
-      });
-    }
+    if (!key) return res.status(500).json({ error: "Server key is missing" });
 
     const response = await fetch(`${url}/rest/v1/reports`, {
       method: "POST",

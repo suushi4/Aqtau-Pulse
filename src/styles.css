@@ -6,3 +6,34 @@
 @media(max-width:540px){.command-trigger{height:41px}.command-trigger span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chrome-actions{gap:4px}.notify{width:41px;height:41px}.hero-card{right:64px;width:auto}.hero-card h1{font-size:24px}.hero-card .eyebrow{font-size:6px}.hero-stats span:nth-last-child(-n+2){display:none}.hero-actions button:last-child{display:none}.hero-actions button{height:37px}.filter-deck button{padding:0 10px}.filter-deck button span{display:none}.filter-deck button svg{width:16px}.filter-deck button:first-child span{display:block}.story-art{height:220px}.pulse-post>footer{gap:13px}.pulse-post>footer button{font-size:0}.pulse-post>footer button svg{width:17px}.mission-board{grid-template-columns:1fr}.event-row,.destination-grid,.community-wall{grid-template-columns:1fr}.feature-event{margin:0 -18px;border-radius:0;height:300px}.feature-event h2{font-size:32px}.big-date{opacity:.25}.explore-canvas{margin:-28px -18px 0;border-radius:0}.explore-canvas h1{font-size:34px}.route-timeline{margin-left:-18px;margin-right:-18px;border-radius:0}.collective-banner{display:block}.collective-banner button{margin-top:15px}.ops-top{grid-template-columns:1fr 1fr}.ops-metric:last-child{display:none}.bar-chart{gap:5px}.profile-stats{grid-template-columns:1fr 1fr}.profile-stats span:nth-child(3){border-left:0;border-top:1px solid var(--line)}.profile-stats span:nth-child(4){border-top:1px solid var(--line)}.badge-orbit{grid-template-columns:1fr 1fr}.overlay{align-items:end;padding:0}.composer{border-radius:22px 22px 0 0;max-height:95vh}.composer-types{grid-template-columns:1fr 1fr}.field-grid{grid-template-columns:1fr}.composer-body>footer{flex-wrap:wrap}.composer-body>footer .primary{flex:1}.command-overlay{padding:70px 12px 0;align-items:start}.profile-banner{flex-wrap:wrap}.profile-banner>button{position:absolute;right:16px;top:16px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:860px){.brand{flex:0 0 42px}.brand .logo{flex:0 0 42px}}
+
+.auth-backdrop{position:fixed;z-index:300;inset:0;background:rgba(2,13,20,.76);backdrop-filter:blur(12px);display:grid;place-items:center;padding:20px}
+.auth-modal{width:min(470px,100%);max-height:94vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:0 40px 120px rgba(0,0,0,.42);padding:30px;position:relative}
+.auth-close{position:absolute;right:18px;top:18px;width:38px;height:38px;border:1px solid var(--line);border-radius:11px;display:grid;place-items:center}
+.auth-close svg{width:17px}
+.auth-brand{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:800;margin-bottom:24px}
+.auth-brand>span{width:33px;height:33px;border-radius:10px;background:linear-gradient(145deg,var(--blue),#0644a3);display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:8px}
+.auth-brand>span i{display:block;width:3px;border-radius:3px;background:#fff}
+.auth-brand>span i:nth-child(1){height:8px}.auth-brand>span i:nth-child(2){height:17px}.auth-brand>span i:nth-child(3){height:11px}
+.auth-modal h2{font-size:27px;letter-spacing:-.045em;margin:6px 0}
+.auth-subtitle{font-size:10px;line-height:1.6;color:var(--muted);max-width:360px;margin:0 0 20px}
+.auth-methods{display:grid;grid-template-columns:1fr 1fr;gap:7px;background:var(--surface2);padding:5px;border-radius:12px;margin-bottom:18px}
+.auth-methods button{height:38px;border-radius:9px;color:var(--muted);font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:6px}
+.auth-methods button svg{width:14px}.auth-methods button.active{background:var(--surface);color:var(--blue);box-shadow:0 5px 14px rgba(20,50,70,.08)}
+.auth-modal form>label{display:block;margin-bottom:12px}
+.auth-modal form>label>span{display:block;font-size:8px;font-weight:800;margin-bottom:6px}
+.auth-input{height:44px;border:1px solid var(--line);border-radius:11px;background:var(--surface2);display:flex;align-items:center;padding:0 11px;gap:8px}
+.auth-input:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 12%,transparent)}
+.auth-input>svg{width:15px;color:var(--muted);flex:0 0 auto}
+.auth-input input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:10px}
+.auth-input button{width:30px;height:30px;display:grid;place-items:center;color:var(--muted)}
+.auth-input button svg{width:15px}
+.auth-submit{width:100%;height:45px;border-radius:11px;background:linear-gradient(145deg,var(--blue),#0762c9);color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;font-size:9px;font-weight:800;box-shadow:0 10px 25px color-mix(in srgb,var(--blue) 28%,transparent)}
+.auth-submit:disabled{opacity:.65;cursor:wait}.auth-submit svg{width:14px}
+.auth-switch{display:block;margin:13px auto 0;color:var(--blue);font-size:8px;font-weight:800}
+.auth-error{padding:9px 10px;border-radius:8px;background:color-mix(in srgb,var(--coral) 11%,var(--surface));color:var(--coral);font-size:8px;line-height:1.45}
+.auth-modal>footer{display:flex;align-items:center;gap:7px;border-top:1px solid var(--line);margin-top:20px;padding-top:15px;color:var(--muted);font-size:7px}
+.auth-modal>footer svg{width:14px;color:var(--green)}
+.auth-success{text-align:center;padding:22px 8px 8px}.auth-success>i{width:62px;height:62px;border-radius:20px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin:0 auto 16px}.auth-success>i svg{width:25px}.auth-success h3{font-size:16px}.auth-success p{font-size:9px;color:var(--muted);line-height:1.6}.auth-success button{margin:15px auto 0;height:40px;border-radius:10px;background:var(--blue);color:#fff;padding:0 14px;display:flex;align-items:center;gap:6px;font-size:8px;font-weight:800}.auth-success button svg{width:13px}
+.otp-heading{display:flex;align-items:center;gap:10px;background:var(--blue-soft);padding:12px;border-radius:11px;margin-bottom:16px}.otp-heading>i{width:35px;height:35px;border-radius:10px;background:var(--surface);color:var(--blue);display:grid;place-items:center}.otp-heading>i svg{width:16px}.otp-heading span{display:grid}.otp-heading b{font-size:9px}.otp-heading small{font-size:7px;color:var(--muted)}
+@media(max-width:540px){.auth-backdrop{align-items:end;padding:0}.auth-modal{border-radius:24px 24px 0 0;padding:24px 20px;max-height:95vh}}
