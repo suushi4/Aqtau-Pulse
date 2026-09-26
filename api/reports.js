@@ -55,6 +55,12 @@ export default async function handler(req, res) {
       status: "new",
       confirmations: 0,
       image_path: body.image_path ? clean(body.image_path, 500) : null,
+      latitude: Number.isFinite(Number(body.latitude))
+        ? Number(body.latitude)
+        : null,
+      longitude: Number.isFinite(Number(body.longitude))
+        ? Number(body.longitude)
+        : null,
     };
 
     if (!report.title || !report.description || !report.location) {
