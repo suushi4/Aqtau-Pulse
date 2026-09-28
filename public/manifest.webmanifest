@@ -1,0 +1,12 @@
+{
+  "name": "twelve — городской пульс Актау",
+  "short_name": "twelve",
+  "description": "Живая карта, события и городские сигналы Актау",
+  "start_url": "/map",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f2f6f8",
+  "theme_color": "#087bf2",
+  "lang": "ru",
+  "icons": []
+}
